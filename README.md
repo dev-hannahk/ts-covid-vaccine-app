@@ -11,8 +11,6 @@
 - Highcharts
 - React-Datepicker
 
-### Preview
-
 ### Goal
 
 - [공공데이터포탈 API](https://www.data.go.kr/index.do)를 활용한 코로나 백신 접종 관련 웹앱 만들기

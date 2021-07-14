@@ -15,12 +15,7 @@ import VaccinationChart from '../components/VaccinationChart';
 import MainCountCard from '../components/MainCountCard';
 import SelectPeriod from '../components/SelectPeriod';
 import { getChartSeries } from '../functions/getChartSeries';
-import { getWeekDays } from '../functions/getDateFunctions';
-
-const API_URL = 'https://api.odcloud.kr/api/15077756/v1/vaccine-stat';
-const API_KEY = process.env.REACT_APP_API_KEY;
-const BASE_DATE = getWeekDays();
-const BASE_SIDO = '전국';
+import { API_URL, API_KEY, BASE_DATE, BASE_SIDO } from '../config';
 
 function Main() {
   const [isSelected, setIsSelected] = useState<boolean>(false);
@@ -28,6 +23,7 @@ function Main() {
   const [isFetchFailed, setIsFetchFailed] = useState<string>('');
   const state = useSelector((state: RootState) => state.chartDataReducer);
   const dispatch = useDispatch();
+  const loadingState = state.isLoading;
   const errorState = state.error;
   const dataList = state.data?.data;
   const series = getChartSeries(state.data?.data || []);
@@ -75,6 +71,7 @@ function Main() {
           startDate={startDate}
           endDate={endDate}
           errorState={errorState}
+          loadingState={loadingState}
         />
       </MainChartWrapper>
     </MainPage>

@@ -5,13 +5,25 @@ export const SET_START_DATE = 'SET_START_DATE';
 export const SET_END_DATE = 'SET_END_DATE';
 export const SET_ERROR = 'SET_ERROR';
 
+export type SidoType =
+  | '전국'
+  | '서울특별시'
+  | '경기도'
+  | '부산광역시'
+  | '인천광역시'
+  | '대전광역시'
+  | '세종특별자치시'
+  | '광주광역시'
+  | '대구광역시'
+  | '울산광역시';
+
 export interface VaccineStatModel {
   accumulatedFirstCnt: number;
   accumulatedSecondCnt: number;
   baseDate: string;
   firstCnt: number;
   secondCnt: number;
-  sido: string;
+  sido: SidoType;
   totalFirstCnt: number;
   totalSecondCnt: number;
 }
@@ -29,7 +41,7 @@ export interface ChartDataState {
   data: VaccineStatModelData | null;
   isLoading: boolean;
   error: string;
-  sido: string;
+  sido: SidoType;
   startDate: Date;
   endDate: Date;
 }
@@ -45,7 +57,7 @@ export interface SetLoadingAction {
 
 export interface SetCityAction {
   type: typeof SET_SIDO;
-  payload: string;
+  payload: SidoType;
 }
 
 export interface SetStartDateAction {

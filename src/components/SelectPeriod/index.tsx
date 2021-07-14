@@ -1,33 +1,21 @@
 import { useState } from 'react';
-import styled from 'styled-components';
-import { theme } from '../styles/theme';
+import { theme } from '../../styles/theme';
 import { useDispatch } from 'react-redux';
-import useDate from '../hooks/useDate';
+import useDate from '../../hooks/useDate';
 import {
   getWeekDays,
   getQuarterDays,
   getMonthDays,
   getStringDate,
   setMaxDate,
-} from '../functions/getDateFunctions';
+} from '../../functions/getDateFunctions';
 import {
   setDaysOption,
   setStartDateState,
   setEndDateState,
-} from '../redux/actions/chartActions';
-
-interface periodListType {
-  id: number;
-  title: string;
-}
-
-const periodList: periodListType[] = [
-  { id: 1, title: '1주' },
-  { id: 2, title: '1개월' },
-  { id: 3, title: '3개월' },
-  { id: 4, title: '전체' },
-  { id: 5, title: '직접입력' },
-];
+} from '../../redux/actions/chartActions';
+import { periodList, periodListType } from './types';
+import { PeriodWrapper, Button } from './styles';
 
 type propsType = {
   hideDatePicker: () => void;
@@ -91,31 +79,3 @@ function SelectPeriod({ hideDatePicker, toggleDatePicker }: propsType) {
 }
 
 export default SelectPeriod;
-
-const PeriodWrapper = styled.div``;
-
-interface ButtonStyled {
-  selected?: boolean;
-  custom?: boolean;
-}
-
-const Button = styled.button<ButtonStyled>`
-  width: ${(props) => (props.custom ? '72px' : '52px')};
-  height: 36px;
-  background: ${(props) =>
-    props.selected ? props.theme.color.bgGreen : 'white'};
-  margin-right: 8px;
-  outline: none;
-  border: 1px solid;
-  border-color: ${(props) =>
-    props.selected ? props.theme.color.green : props.theme.color.borderGrey};
-  border-radius: 10px;
-  cursor: pointer;
-  color: ${(props) =>
-    props.selected ? props.theme.color.green : props.theme.color.grey};
-  font-weight: 600;
-  font-size: 12px;
-
-  @media screen and (max-width: 420px) {
-  }
-`;

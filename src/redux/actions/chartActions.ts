@@ -10,16 +10,15 @@ import {
   SET_END_DATE,
   SET_LOADING,
   SET_ERROR,
+  SidoType,
 } from '../types';
-
-const API_URL = 'https://api.odcloud.kr/api/15077756/v1/vaccine-stat';
-const API_KEY = process.env.REACT_APP_API_KEY;
+import { API_URL, API_KEY } from '../../config';
 
 export const setCalendarData =
   (
     gap: number,
     date: string,
-    sido: string
+    sido: SidoType
   ): ThunkAction<void, RootState, null, ChartDataAction> =>
   async (dispatch) => {
     dispatch({
@@ -44,7 +43,7 @@ export const setCalendarData =
 export const setDaysOption =
   (
     date: string,
-    sido: string
+    sido: SidoType
   ): ThunkAction<void, RootState, null, ChartDataAction> =>
   async (dispatch) => {
     dispatch({

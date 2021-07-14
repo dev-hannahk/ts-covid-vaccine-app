@@ -1,8 +1,9 @@
-import styled from 'styled-components';
-import { theme } from '../styles/theme';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { defualtChartOptions } from '../lib/chart/defaultChartOptions';
+import { theme } from '../../styles/theme';
+import { ChartWrapper } from './styles';
+import { defualtChartOptions } from '../../lib/chart/defaultChartOptions';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 require('highcharts/modules/exporting')(Highcharts);
 require('highcharts/modules/export-data')(Highcharts);
@@ -20,6 +21,7 @@ type propsType = {
   startDate: string | undefined;
   endDate: string | undefined;
   errorState: string;
+  loadingState: boolean;
 };
 
 function VaccinationChart({
@@ -28,6 +30,7 @@ function VaccinationChart({
   startDate,
   endDate,
   errorState,
+  loadingState,
 }: propsType) {
   const accumulatOptions = {
     defualtChartOptions,
@@ -80,14 +83,18 @@ function VaccinationChart({
   return (
     <ChartWrapper>
       <div>
-        {errorState !== '' ? (
+        {loadingState ? (
+          <CircularProgress />
+        ) : errorState !== '' ? (
           errorState
         ) : (
           <HighchartsReact highcharts={Highcharts} options={accumulatOptions} />
         )}
       </div>
       <div>
-        {errorState !== '' ? (
+        {loadingState ? (
+          <CircularProgress />
+        ) : errorState !== '' ? (
           errorState
         ) : (
           <HighchartsReact highcharts={Highcharts} options={dailytOptions} />
@@ -98,23 +105,3 @@ function VaccinationChart({
 }
 
 export default VaccinationChart;
-
-const ChartWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-self: center;
-  width: 510px;
-
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: inherit;
-    height: 430px;
-  }
-
-  div:first-child {
-    margin-top: 5px;
-    margin-bottom: 10px;
-  }
-`;

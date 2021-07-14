@@ -1,49 +1,11 @@
 import styled from 'styled-components';
-import { theme } from '../styles/theme';
 import { NavLink } from 'react-router-dom';
 
-interface navListType {
-  id: number;
-  title: string;
-  link: string;
-}
-
-const navList: navListType[] = [
-  { id: 1, title: '접종 통계', link: '/' },
-  { id: 2, title: '접종 기관', link: '/map' },
-];
-
-function Navigation() {
-  return (
-    <NavWrapper>
-      <TitleBox theme={theme}>
-        <span>Covid-19</span>
-        <span>Vaccinations</span>
-      </TitleBox>
-      <NavUl theme={theme}>
-        {navList.map((list) => (
-          <NavLi
-            theme={theme}
-            key={list.id}
-            to={list.link}
-            activeClassName='active'
-            exact
-          >
-            {list.title}
-          </NavLi>
-        ))}
-      </NavUl>
-    </NavWrapper>
-  );
-}
-
-export default Navigation;
-
-const NavWrapper = styled.div`
+export const NavWrapper = styled.div`
   margin-right: 60px;
 `;
 
-const TitleBox = styled.div`
+export const TitleBox = styled.div`
   width: 240px;
   height: 50px;
   border: 1px solid ${({ theme }) => theme.color.borderGrey};
@@ -66,14 +28,14 @@ const TitleBox = styled.div`
   }
 `;
 
-const NavUl = styled.div`
+export const Nav = styled.div`
   width: 240px;
   border-radius: 10px;
   background-color: white;
   border: 1px solid ${({ theme }) => theme.color.borderGrey};
 `;
 
-const NavLi = styled(NavLink)`
+export const NavLi = styled(NavLink)`
   display: flex;
   justify-content: flex-start;
   align-items: center;
